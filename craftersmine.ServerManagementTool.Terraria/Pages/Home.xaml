@@ -1,0 +1,70 @@
+﻿<ui:UiPage x:Class="craftersmine.ServerManagementTool.Terraria.Pages.Home"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:craftersmine.ServerManagementTool.Terraria"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Home"
+      Scrollable="True">
+
+    <StackPanel Margin="0 10 10 0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="Server Instance:" FontSize="14pt" FontWeight="DemiBold" VerticalAlignment="Top" Margin="0 0 20 0"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="instance_name" VerticalAlignment="Center" FontWeight="Regular" FontSize="14pt" x:Name="InstanceNameTextBlock" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="Server Executable Path:" FontSize="14pt" FontWeight="DemiBold" VerticalAlignment="Top" Margin="0 0 20 0"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="executable_path" VerticalAlignment="Center" FontWeight="Regular" FontSize="14pt" x:Name="InstanceExecutableTextBlock" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="Server Status:" FontSize="14pt" FontWeight="DemiBold" VerticalAlignment="Top" Margin="0 0 20 0"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}" Text="server_status" VerticalAlignment="Center" FontWeight="Regular" FontSize="14pt" x:Name="InstanceStateTextBlock" TextWrapping="Wrap"/>
+        </Grid>
+
+        <StackPanel Margin="0 48 0 0" Orientation="Horizontal">
+
+            <ui:Button Content="Launch" Icon="Play16" Appearance="Primary" Margin="0 0 10 0" Click="LaunchInstance_Click" x:Name="LaunchButton"/>
+            <ui:Button Content="Stop" Icon="Stop16" Appearance="Secondary" Margin="0 0 10 0" IsEnabled="False" Click="StopInstance_Click" x:Name="StopButton"/>
+            <ui:Button Content="Kill Process" Icon="CalendarCancel16" IsEnabled="False" Click="KillButton_OnClick" x:Name="KillButton"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0 48 0 0">
+            <Grid Margin="0 0 18 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ui:ProgressRing Grid.Row="0" Grid.Column="0" x:Name="CpuRing" Progress="0" />
+                <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Text="CPU: cpu_usage" Margin="0 18 0 0" x:Name="CpuUsageTextBlock"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Memory: "/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="mem_usage" x:Name="MemUsageTextBlock"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Process Priority: "/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="proc_priority" x:Name="ProcessPriorityTextBlock"/>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
+</ui:UiPage>

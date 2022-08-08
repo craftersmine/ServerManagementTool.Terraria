@@ -1,0 +1,51 @@
+﻿<Page x:Class="craftersmine.ServerManagementTool.Terraria.Pages.Console"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:craftersmine.ServerManagementTool.Terraria.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:terraria="clr-namespace:craftersmine.ServerManagementTool.Terraria"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Console">
+
+    <Grid Margin="0 0 18 18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" Margin="0 0 0 18" x:Name="ConsoleBox" SelectionMode="Single" DataContext="{x:Static terraria:StaticData.ServerProcess}" ItemsSource="{Binding Path=CurrentConsole.ConsoleEntries}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="terraria:ConsoleEntry">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ui:SymbolIcon Grid.Column="0" Margin="0 0 10 0" Symbol="{Binding Path=Icon}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Path=Occurred}" Margin="0 0 10 0"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Path=Content}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ui:TextBox Grid.Row="0" Grid.Column="0" PlaceholderEnabled="True" PlaceholderText="Enter a command to execute..." Margin="0 0 10 0" x:Name="CommandTextBox" KeyUp="CommandTextBox_OnKeyUp"/>
+            <ui:Button Grid.Row="0" Grid.Column="1" Appearance="Primary" Content="Execute" Icon="ArrowEnterLeft20" Margin="0 0 10 0" Click="ExecuteButton_Click" x:Name="ExecuteButton"/>
+            <ui:Button Grid.Row="0" Grid.Column="2" Content="Scroll to bottom" Icon="ArrowDown16" Click="ScrollToBottom_Click"/>
+            <ui:Hyperlink Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 10 0 0" Icon="BookQuestionMark20" Content="Open help about commands" NavigateUri="https://terraria.fandom.com/wiki/Server#List_of_console_commands"/>
+        </Grid>
+    </Grid>
+</Page>
