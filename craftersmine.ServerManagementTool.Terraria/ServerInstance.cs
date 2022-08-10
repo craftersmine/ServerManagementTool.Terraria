@@ -63,5 +63,26 @@ namespace craftersmine.ServerManagementTool.Terraria
             if (UseConfigFile)
                 Config = ServerConfig.LoadFromFile(ConfigFile);
         }
+
+        public ServerWorld[] LoadWorlds()
+        {
+            DirectoryInfo worldRoot = new DirectoryInfo(Config!.WorldRoot);
+            string worldFileName = Path.GetFileNameWithoutExtension(Config.WorldFile);
+            var files = worldRoot.GetFiles(worldFileName + ".*");
+            List<ServerWorld> worlds = new List<ServerWorld>();
+            foreach (var file in files)
+            {
+                worlds.Add(new ServerWorld()
+                {
+                    IsBackup = file.Extension.Contains("bak"),
+                    IsRestoreBackup = file.Extension.Contains("wbk"),
+                    WorldFilePath = file.FullName,
+                    WorldName = worldFileName,
+                    WorldSize = file.Length,
+                    CreatedDate = file.CreationTime
+                });
+            }
+            return worlds.ToArray();
+        }
     }
 }
