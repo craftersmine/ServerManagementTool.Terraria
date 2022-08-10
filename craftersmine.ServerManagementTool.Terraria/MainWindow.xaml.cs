@@ -20,6 +20,7 @@ using Wpf.Ui.Controls;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Services;
 using Path = System.IO.Path;
+using Settings = craftersmine.ServerManagementTool.Terraria.Properties.Settings;
 
 namespace craftersmine.ServerManagementTool.Terraria
 {
@@ -107,6 +108,8 @@ namespace craftersmine.ServerManagementTool.Terraria
                         {
                             StaticData.CurrentServerInstance.ExecutablePath = dlg.FileName;
                             StaticData.CurrentServerInstance.SaveToFile(StaticData.CurrentServerInstance.InstanceFilePath);
+                            Settings.Default.ServerExecutablePath = StaticData.CurrentServerInstance.ExecutablePath; 
+                            Settings.Default.Save();
                             DialogHost.Hide();
                             StaticData.RequestRefresh(true);
                         }
@@ -186,6 +189,11 @@ namespace craftersmine.ServerManagementTool.Terraria
                 Settings.Default.Save();
                 StaticData.RequestRefresh();
             }
+        }
+
+        private void DlgHostRightButtonClick(object sender, RoutedEventArgs e)
+        {
+            DialogHost.Hide();
         }
     }
 }

@@ -56,9 +56,10 @@
                     <ui:NavigationItem Icon="Home16" Content="Home" PageType="{x:Type pages:Home}" PageTag="homepage"/>
                     <ui:NavigationItem Icon="WindowConsole20" Content="Console" PageType="{x:Type pages:Console}" PageTag="console"/>
                     <ui:NavigationItem Icon="Wrench16" Content="Config" PageType="{x:Type pages:Config}" PageTag="config"/>
+                    <ui:NavigationItem Icon="FolderGlobe16" Content="Worlds" PageType="{x:Type pages:Worlds}" PageTag="worlds"/>
                 </ui:NavigationStore.Items>
                 <ui:NavigationStore.Footer>
-                    <ui:NavigationItem Icon="Settings16" Content="Settings"/>
+                    <ui:NavigationItem Icon="Settings16" Content="Settings" PageType="{x:Type pages:Settings}" PageTag="settings"/>
                 </ui:NavigationStore.Footer>
             </ui:NavigationStore>
 
@@ -70,6 +71,6 @@
             </Border>
         </Grid>
 
-        <ui:Dialog Grid.Row="0" Grid.RowSpan="2" x:Name="DialogHost"></ui:Dialog>
+        <ui:Dialog Grid.Row="0" Grid.RowSpan="2" x:Name="DialogHost" ButtonRightClick="DlgHostRightButtonClick"/>
     </Grid>
 </ui:UiWindow>
