@@ -35,18 +35,34 @@ namespace craftersmine.ServerManagementTool.Terraria.Pages
             StaticData.RefreshRequested += StaticData_RefreshRequested;
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            StaticData.ServerProcess!.ServerRefreshed -= ServerProcess_ServerRefreshed;
+            StaticData.ServerProcess.ServerRefreshed += ServerProcess_ServerRefreshed;
+            InstanceStateTextBlock.Text = StaticData.ServerProcess.ServerState.ToString();
+            InstanceNameTextBlock.Text = StaticData.CurrentServerInstance!.Name;
+            InstanceExecutableTextBlock.Text = StaticData.CurrentServerInstance.ExecutablePath;
+            CpuRing.Progress = 0;
+            CpuUsageTextBlock.Text = $"CPU: 0.00%";
+            MemUsageTextBlock.Text = "0 B";
+            ProcessPriorityTextBlock.Text = "Idle";
+            StaticData.RefreshRequested -= StaticData_RefreshRequested;
+            StaticData.RefreshRequested += StaticData_RefreshRequested;
+            base.OnInitialized(e);
+        }
+
         private void StaticData_RefreshRequested(object? sender, ServerRefreshRequestedEventArgs e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                InstanceStateTextBlock.Text = StaticData.ServerProcess!.ServerState.ToString();
-                InstanceNameTextBlock.Text = StaticData.CurrentServerInstance!.Name;
-                InstanceExecutableTextBlock.Text = StaticData.CurrentServerInstance.ExecutablePath;
-                CpuRing.Progress = 0;
-                CpuUsageTextBlock.Text = $"CPU: 0.00%";
-                MemUsageTextBlock.Text = "0 B";
-                ProcessPriorityTextBlock.Text = "Idle";
-            });
+            //Dispatcher.Invoke(() =>
+            //{
+            //    InstanceStateTextBlock.Text = StaticData.ServerProcess!.ServerState.ToString();
+            //    InstanceNameTextBlock.Text = StaticData.CurrentServerInstance!.Name;
+            //    InstanceExecutableTextBlock.Text = StaticData.CurrentServerInstance.ExecutablePath;
+            //    CpuRing.Progress = 0;
+            //    CpuUsageTextBlock.Text = $"CPU: 0.00%";
+            //    MemUsageTextBlock.Text = "0 B";
+            //    ProcessPriorityTextBlock.Text = "Idle";
+            //});
         }
 
         private void ServerProcess_ServerRefreshed(object? sender, ServerInfoEventArgs e)
