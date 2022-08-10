@@ -31,7 +31,7 @@ namespace craftersmine.ServerManagementTool.Terraria
                 return string.Format("{0:F2} kB", MemUsage / 1024d);
             }
 
-            return string.Format("{0:F2} B", MemUsage);
+            return string.Format("{0} B", MemUsage);
         }
     }
 }
